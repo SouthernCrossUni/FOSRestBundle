@@ -35,10 +35,10 @@ class FOSRestBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new SerializerConfigurationPass());
-        $container->addCompilerPass(new ConfigurationCheckPass());
+        $container->addCompilerPass(new ConfigurationCheckPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, -10);
         $container->addCompilerPass(new FormatListenerRulesPass());
         $container->addCompilerPass(new TwigExceptionPass());
         $container->addCompilerPass(new JMSFormErrorHandlerPass());
-        $container->addCompilerPass(new JMSHandlersPass(), PassConfig::TYPE_REMOVE);
+        $container->addCompilerPass(new JMSHandlersPass(), PassConfig::TYPE_BEFORE_REMOVING, -10);
     }
 }
